@@ -2,6 +2,7 @@ package com.aggrey.springboot.application.demo.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -19,27 +20,25 @@ public class Student {
     )
     private Long id;
     private String name;
-    private int age;
+    @Transient
+    private Integer age;
     private LocalDate dob;
     private String email;
 
-    public Student(String name, int age, LocalDate dob, String email) {
+    public Student(String name, LocalDate dob, String email) {
         this.name = name;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
 
-    public Student(Long id, String name, int age, LocalDate dob, String email) {
+    public Student(Long id, String name, LocalDate dob, String email) {
         this.id = id;
         this.name = name;
-        this.age = age;
         this.dob = dob;
         this.email = email;
     }
 
     public Student (){}
-
 
     public Long getId() {
         return id;
@@ -57,8 +56,8 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setAge(int age) {
@@ -91,9 +90,6 @@ public class Student {
                 ", email='" + email + '\'' +
                 '}';
     }
-
-
-
 
 
 }

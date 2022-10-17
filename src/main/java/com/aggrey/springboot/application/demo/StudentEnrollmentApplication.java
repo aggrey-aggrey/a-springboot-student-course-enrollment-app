@@ -3,9 +3,9 @@ package com.aggrey.springboot.application.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
-public class DemoApplication {
+public class StudentEnrollmentApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(StudentEnrollmentApplication.class, args);
 	}
 
 }
