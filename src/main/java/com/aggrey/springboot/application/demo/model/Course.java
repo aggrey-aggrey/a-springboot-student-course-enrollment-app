@@ -3,15 +3,32 @@ package com.aggrey.springboot.application.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 
 @ToString
 @Setter
 @Getter
+@Entity
+@Component
 public class Course {
+    @Id
+    @SequenceGenerator(
+            name="course_sequence",
+            sequenceName ="course_sequence")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "course_sequence")
+    @Column(name = "course_id")
     private Long courserId;
+    @Column(name = "course_name")
     private String name;
+    @Column(name ="course_description")
     private String description;
-    private  Category category;
+
+    @Transient
+    private Category category;
 
 
     public Course(String name, String description, Category category) {
@@ -27,4 +44,7 @@ public class Course {
         this.category = category;
     }
 
+    public Course() {
+
+    }
 }
