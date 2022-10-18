@@ -1,9 +1,16 @@
 package com.aggrey.springboot.application.demo.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
+@ToString
+@Setter
+@Getter
 @Entity
 @Table
 public class Student {
@@ -39,57 +46,6 @@ public class Student {
     }
 
     public Student (){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(String name){
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", dob='" + dob + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
 
 }
