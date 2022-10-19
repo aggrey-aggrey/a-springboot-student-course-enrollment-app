@@ -4,6 +4,8 @@ import com.aggrey.springboot.application.demo.model.Course;
 import com.aggrey.springboot.application.demo.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Objects;
@@ -51,11 +53,18 @@ public class CourseService {
                 !Objects.equals(course.getDescription(), description)){
             course.setDescription(description);
         }
-
         courseRepository.save(course);
     }
 
+    public void deleteCourse(Long courseId) {
+      boolean exists =  courseRepository.existsById(courseId);
 
+        if (!exists){
+            throw new IllegalStateException(
+                    "course with id " + courseId + " does not exist");
+        }
+        courseRepository.deleteById(courseId);
+    }
 }
 
 
