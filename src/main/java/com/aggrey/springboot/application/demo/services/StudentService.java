@@ -55,9 +55,9 @@ public class StudentService {
 
         if (email != null && email.length () > 0 &&
                 !Objects.equals(student.getEmail(), email)){
+            //check that email has not be taken
             Optional<Student> studentOptional = studentRepository
                     .findStudentByEmail(email);
-            //check that email has not be taken
             if(studentOptional.isPresent()){
                 throw new IllegalStateException("email already exist");
             }
