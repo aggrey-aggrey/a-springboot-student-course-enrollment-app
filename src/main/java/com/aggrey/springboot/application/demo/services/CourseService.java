@@ -51,5 +51,11 @@ public class CourseService {
                 !Objects.equals(course.getDescription(), description)){
             course.setDescription(description);
         }
+
+        courseRepository.save(course);
     }
+
+
 }
+
+
