@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Table
 @Component
 public class Course {
     @Id
@@ -21,15 +22,13 @@ public class Course {
             strategy = GenerationType.SEQUENCE,
             generator = "course_sequence")
     @Column(name = "course_id")
-    private Long courserId;
+    private Long courseId;
     @Column(name = "course_name")
     private String name;
     @Column(name ="course_description")
     private String description;
-
     @Transient
     private Category category;
-
 
     public Course(String name, String description, Category category) {
         this.name = name;
@@ -38,7 +37,7 @@ public class Course {
     }
 
     public Course(Long courserId, String name, String description, Category category) {
-        this.courserId = courserId;
+        this.courseId = courserId;
         this.name = name;
         this.description = description;
         this.category = category;
