@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import com.aggrey.springboot.application.demo.services.StudentService;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -16,6 +20,13 @@ public class StudentController {
     @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
+    }
+
+
+    @GetMapping(path = "{studentId}")
+    public Student getStudent (@PathVariable("studentId") Long studentId){
+        return  studentService.getStudentById(studentId);
+
     }
 
     @GetMapping
@@ -39,5 +50,9 @@ public class StudentController {
                                @RequestParam(required = false) String email){
         studentService.updateStudent(studentId, name, email);
     }
+
+
+
+
 }
 
