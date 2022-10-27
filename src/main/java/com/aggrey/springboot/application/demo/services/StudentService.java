@@ -64,4 +64,14 @@ public class StudentService {
             student.setEmail(email);
         }
     }
+
+    public Student getStudentById(Long studentId) {
+        boolean exists = studentRepository.existsById(studentId);
+
+        if (!exists) {
+            throw new IllegalStateException(
+                    "student with id " + studentId + " does not exist");
+        }
+           return studentRepository.findById(studentId).get();
+    }
 }
