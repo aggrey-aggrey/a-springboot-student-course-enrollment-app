@@ -19,7 +19,7 @@ public class StudentConfig {
     CommandLineRunner commandLineRunner(StudentRepository repository) {
         return args -> {
             Student JohnyCool = new Student(
-                    "John Cool",
+                    "Johny Cool",
                     LocalDate.of(2000, Month.JANUARY, 15),
                     "johhnycool@test.com"
             );
@@ -30,8 +30,20 @@ public class StudentConfig {
                     "rayraymond@test.com"
             );
 
+            Student AshleyPerkins = new Student(
+                    "Ashley Perkins",
+                    LocalDate.of(2022, Month.FEBRUARY, 15),
+                    "ashleyperkins@test.com"
+            );
+
+            Student LisaLisa = new Student(
+                    "Lisa Lisa",
+                    LocalDate.of(2022, Month.FEBRUARY, 15),
+                    "lisalisa@test.com"
+            );
+
             repository.saveAll(
-                    List.of(JohnyCool,RayRaymond));
+                    List.of(JohnyCool,RayRaymond,AshleyPerkins));
         };
     }
 }

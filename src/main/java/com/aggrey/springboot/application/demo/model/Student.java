@@ -2,13 +2,10 @@ package com.aggrey.springboot.application.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 
-@ToString
 @Setter
 @Getter
 @Entity
@@ -48,4 +45,7 @@ public class Student {
     public Student (){}
 
 
+    public String toString() {
+        return "Student(id=" + this.getId() + ", name=" + this.getName() + ", age=" + this.getAge() + ", dob=" + this.getDob() + ", email=" + this.getEmail() + ")";
+    }
 }
