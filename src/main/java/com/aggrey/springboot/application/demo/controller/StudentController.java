@@ -2,6 +2,7 @@ package com.aggrey.springboot.application.demo.controller;
 
 import com.aggrey.springboot.application.demo.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.aggrey.springboot.application.demo.services.StudentService;
 
@@ -23,20 +24,24 @@ public class StudentController {
     }
 
     @GetMapping(path = "{studentId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE', 'ROLE_STUDENT')")
     public Student getStudent (@PathVariable("studentId") Long studentId){
         return  studentService.getStudentById(studentId);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public List<Student> getStudents (){
         return studentService.getStudents();
     }
     @PostMapping
+    @PreAuthorize("hasAuthority('student:write')")
     public void enrollNewStudent(@RequestBody Student student){
         studentService.enrollNewStudent(student);
     }
 
     @DeleteMapping(path="{studentId}")
+    @PreAuthorize("hasAnyAuthority('student:write')")
     public void deleteStudent (@PathVariable("studentId")Long studentId){
         studentService.deleteStudent(studentId);
     }
@@ -50,6 +55,7 @@ public class StudentController {
     }*/
 
     @PutMapping(path = "{studentId}")
+    @PreAuthorize("hasAnyAuthority('student:write')")
     public void updateStudentInfo (@PathVariable("studentId") Long studentId,@RequestBody Student student){
         System.out.println(String.format("%s %s", student, student));
         studentService.updateStudent(studentId,student);

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +20,7 @@ import static com.aggrey.springboot.application.demo.security.ApplicationUserRol
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private ApplicationUserPermission applicationUserPermission;
@@ -35,15 +37,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index","/css/*", "/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
-                .antMatchers(HttpMethod.DELETE,"/api/v1/students/**").hasAuthority(STUDENT_WRITE.getPermission())
+               // .antMatchers("/api/**").hasRole(STUDENT.name())
+         /**       .antMatchers(HttpMethod.DELETE,"/api/v1/students/**").hasAuthority(STUDENT_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/api/v1/students/**").hasAuthority(STUDENT_WRITE.getPermission())
                 .antMatchers(HttpMethod.PUT,"/api/v1/students/**").hasAuthority(STUDENT_WRITE.getPermission())
                 .antMatchers(HttpMethod.GET,"/api/v1/students/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
                 .antMatchers(HttpMethod.DELETE,"/api/v1/course/**").hasAuthority(COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/api/v1/course/**").hasAuthority(COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.PUT,"/api/v1/course/**").hasAuthority(COURSE_WRITE.getPermission())
-                .antMatchers(HttpMethod.GET,"/api/v1/course/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
+                .antMatchers(HttpMethod.GET,"/api/v1/course/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())**/
                 .anyRequest()
                 .authenticated()
                 .and()
