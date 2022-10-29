@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-
     @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -73,5 +72,11 @@ public class StudentService {
                     "student with id " + studentId + " does not exist");
         }
            return studentRepository.findById(studentId).get();
+    }
+    public void updateStudent(Long studentId, Student student) {
+        student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException("student with id " + studentId + "does not exist"));
+         studentRepository.save(student);
+
     }
 }
