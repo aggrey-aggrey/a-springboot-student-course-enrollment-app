@@ -43,7 +43,7 @@ public class StudentConfig {
             );
 
             repository.saveAll(
-                    List.of(JohnyCool,RayRaymond,AshleyPerkins));
+                    List.of(JohnyCool,RayRaymond,AshleyPerkins,LisaLisa));
         };
     }
 }
