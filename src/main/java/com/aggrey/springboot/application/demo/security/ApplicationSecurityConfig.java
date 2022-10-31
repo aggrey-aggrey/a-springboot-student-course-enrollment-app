@@ -17,6 +17,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.aggrey.springboot.application.demo.security.ApplicationUserPermission.*;
 
 import static com.aggrey.springboot.application.demo.security.ApplicationUserRoles.*;
@@ -54,7 +56,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/courses", true)
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
+                    .key("somethingverysecured"); //defaults to 2 weeks
     }
     @Override
     @Bean
