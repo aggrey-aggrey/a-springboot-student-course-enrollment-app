@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
+
 import static com.aggrey.springboot.application.demo.security.ApplicationUserPermission.*;
 
 import static com.aggrey.springboot.application.demo.security.ApplicationUserRoles.*;
@@ -35,6 +38,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable()
+                /*.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()*/
                 .authorizeRequests()
                 .antMatchers("/", "index","/css/*", "/js/*").permitAll()
                // .antMatchers("/api/**").hasRole(STUDENT.name())
@@ -49,7 +54,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin();
     }
     @Override
     @Bean
